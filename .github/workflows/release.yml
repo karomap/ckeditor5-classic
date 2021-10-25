@@ -1,0 +1,38 @@
+name: Main
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Branch name
+        id: branch_name
+        run: |
+          echo ::set-output name=SOURCE_NAME::${GITHUB_REF#refs/*/}
+          echo ::set-output name=SOURCE_BRANCH::${GITHUB_REF#refs/heads/}
+          echo ::set-output name=SOURCE_TAG::${GITHUB_REF#refs/tags/}
+
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js LTS
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14.x'
+
+      - name: Build
+        run: |
+          yarn --frozen-lockfile
+          yarn build
+
+      - name: Archive build artifact
+        run: tar -czvf build-${{ steps.branch_name.outputs.SOURCE_TAG }}.tar.gz build/
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: build-${{ steps.branch_name.outputs.SOURCE_TAG }}.tar.gz

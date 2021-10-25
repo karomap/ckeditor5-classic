@@ -49,6 +49,6 @@
     "webpack-cli": "^4.8.0"
   },
   "scripts": {
-    "build": "webpack --mode production --progress --color"
+    "build": "webpack --mode production"
   }
 }
