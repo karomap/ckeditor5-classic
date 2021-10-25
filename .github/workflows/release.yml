@@ -1,4 +1,4 @@
-name: Main
+name: Release
 
 on:
   push:
@@ -30,9 +30,13 @@ jobs:
           yarn build
 
       - name: Archive build artifact
-        run: tar -czvf build-${{ steps.branch_name.outputs.SOURCE_TAG }}.tar.gz build/
+        run: tar -czvf ckeditor5-custom-${{ steps.branch_name.outputs.SOURCE_TAG }}.tar.gz build/
+
+      - name: Generate Changelog
+        run: git log --oneline $(git describe --tags --abbrev=0 $(git rev-list --tags --skip=1 --max-count=1))..$(git describe --tags --abbrev=0) > ${{ github.workspace }}-CHANGELOG.md
 
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          files: build-${{ steps.branch_name.outputs.SOURCE_TAG }}.tar.gz
+          files: ckeditor5-custom-${{ steps.branch_name.outputs.SOURCE_TAG }}.tar.gz
+          body_path: ${{ github.workspace }}-CHANGELOG.md
