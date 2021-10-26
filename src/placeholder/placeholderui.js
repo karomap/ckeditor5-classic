@@ -5,10 +5,22 @@ import { addListToDropdown, createDropdown } from '@ckeditor/ckeditor5-ui/src/dr
 import Model from '@ckeditor/ckeditor5-ui/src/model';
 import Collection from '@ckeditor/ckeditor5-utils/src/collection';
 
+/**
+ * @typedef ListDropdownItemDefinition
+ * @property {import('@ckeditor/ckeditor5-ui/src/model').default} model
+ * @property {"separator" | "button" | "switchbutton"} type
+ */
+
+/**
+ * @param {Array<string>} placeholderNames
+ * @returns {Collection<ListDropdownItemDefinition>}
+ */
 function getDropdownItemsDefinitions(placeholderNames) {
+  /** @type {Collection<ListDropdownItemDefinition>} */
   const itemDefinitions = new Collection();
 
   for (const name of placeholderNames) {
+    /** @type {ListDropdownItemDefinition} */
     const definition = {
       type: 'button',
       model: new Model({
@@ -29,6 +41,7 @@ export class PlaceholderUI extends Plugin {
   init() {
     const editor = this.editor;
     const t = editor.t;
+    /** @type {Array<string>} */
     const placeholderNames = editor.config.get('placeholderConfig.types');
 
     // The "placeholder" dropdown must be registered among the UI components of the editor

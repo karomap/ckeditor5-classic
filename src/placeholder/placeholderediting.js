@@ -76,7 +76,12 @@ export class PlaceholderEditing extends Plugin {
       view: (modelItem, { writer: viewWriter }) => createPlaceholderView(modelItem, viewWriter),
     });
 
-    // Helper method for both downcast converters.
+    /**
+     * Helper method for both downcast converters.
+     * @param {import('@ckeditor/ckeditor5-engine/src/view/element').default} modelItem
+     * @param {import('@ckeditor/ckeditor5-engine/src/view/downcastwriter').default} viewWriter
+     * @returns {import('@ckeditor/ckeditor5-engine/src/view/containerelement').default}
+     */
     function createPlaceholderView(modelItem, viewWriter) {
       const name = modelItem.getAttribute('name');
 
