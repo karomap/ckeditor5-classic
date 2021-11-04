@@ -5,6 +5,7 @@
 
 import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
 import Autoformat from '@ckeditor/ckeditor5-autoformat/src/autoformat';
+import AutoSave from '@ckeditor/ckeditor5-autosave/src/autosave';
 import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
 import Code from '@ckeditor/ckeditor5-basic-styles/src/code';
 import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
@@ -63,8 +64,7 @@ import TableCellProperties from '@ckeditor/ckeditor5-table/src/tablecellproperti
 import TableProperties from '@ckeditor/ckeditor5-table/src/tableproperties';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
-import SimpleUploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/simpleuploadadapter';
-import EditorWatchdog from '@ckeditor/ckeditor5-watchdog/src/editorwatchdog';
+// import SimpleUploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/simpleuploadadapter';
 import WordCount from '@ckeditor/ckeditor5-word-count/src/wordcount';
 
 import Placeholder from './placeholder/placeholder';
@@ -77,6 +77,7 @@ Editor.builtinPlugins = [
   Autoformat,
   AutoImage,
   AutoLink,
+  AutoSave,
   BlockQuote,
   Bold,
   Code,
@@ -113,7 +114,7 @@ Editor.builtinPlugins = [
   PasteFromOffice,
   RemoveFormat,
   RestrictedEditingMode,
-  SimpleUploadAdapter,
+  // SimpleUploadAdapter,
   SourceEditing,
   SpecialCharacters,
   SpecialCharactersArrows,
@@ -137,4 +138,4 @@ Editor.builtinPlugins = [
   Placeholder,
 ];
 
-export default { Editor, EditorWatchdog };
+export default Editor;

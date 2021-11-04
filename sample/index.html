@@ -130,87 +130,80 @@
     <script src="../build/translations/id.js"></script>
     <script src="../build/ckeditor.js"></script>
     <script>
-      const watchdog = new CKSource.EditorWatchdog();
-
-      window.watchdog = watchdog;
-
-      watchdog.setCreator((element, config) => {
-        return CKSource.Editor.create(element, config).then(editor => {
-          return editor;
-        });
-      });
-
-      watchdog.setDestructor(editor => {
-        return editor.destroy();
-      });
-
-      watchdog.on('error', handleError);
-
-      watchdog
-        .create(document.querySelector('.editor'), {
-          removePlugins: ['RestrictedEditingMode'],
-          // removePlugins: ['StandardEditingMode'],
-          toolbar: {
-            items: [
-              'heading',
-              '|',
-              'bold',
-              'italic',
-              'underline',
-              'superscript',
-              'subscript',
-              'strikethrough',
-              'removeFormat',
-              '|',
-              'bulletedList',
-              'numberedList',
-              '|',
-              'alignment',
-              'outdent',
-              'indent',
-              '|',
-              'link',
-              'imageInsert',
-              'mediaEmbed',
-              'blockQuote',
-              'insertTable',
-              'specialCharacters',
-              'horizontalLine',
-              'pageBreak',
-              '|',
-              'undo',
-              'redo',
-              'findAndReplace',
-              '-',
-              'fontFamily',
-              'fontSize',
-              'fontColor',
-              'fontBackgroundColor',
-              '|',
-              'code',
-              'codeBlock',
-              'sourceEditing',
-              'placeholder',
-            ],
-            shouldNotGroupWhenFull: true,
+      ClassicEditor.create(document.querySelector('.editor'), {
+        removePlugins: ['RestrictedEditingMode'],
+        // removePlugins: ['StandardEditingMode'],
+        toolbar: {
+          items: [
+            'heading',
+            '|',
+            'bold',
+            'italic',
+            'underline',
+            'superscript',
+            'subscript',
+            'strikethrough',
+            'removeFormat',
+            '|',
+            'bulletedList',
+            'numberedList',
+            '|',
+            'alignment',
+            'outdent',
+            'indent',
+            '|',
+            'link',
+            'imageInsert',
+            'mediaEmbed',
+            'blockQuote',
+            'insertTable',
+            'specialCharacters',
+            'horizontalLine',
+            'pageBreak',
+            '|',
+            'undo',
+            'redo',
+            'findAndReplace',
+            '-',
+            'fontFamily',
+            'fontSize',
+            'fontColor',
+            'fontBackgroundColor',
+            '|',
+            'code',
+            'codeBlock',
+            'sourceEditing',
+            'placeholder',
+          ],
+          shouldNotGroupWhenFull: true,
+        },
+        language: 'id',
+        image: {
+          toolbar: [
+            'imageTextAlternative',
+            'imageStyle:inline',
+            'imageStyle:block',
+            'imageStyle:side',
+            'toggleImageCaption',
+            'linkImage',
+          ],
+        },
+        table: {
+          contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells', 'tableCellProperties', 'tableProperties'],
+        },
+        placeholderConfig: {
+          types: ['name', 'email', 'address'],
+        },
+        autosave: {
+          waitingTime: 5000, // in ms
+          save(editor) {
+            const data = editor.getData();
+            console.log(data);
           },
-          language: 'id',
-          image: {
-            toolbar: [
-              'imageTextAlternative',
-              'imageStyle:inline',
-              'imageStyle:block',
-              'imageStyle:side',
-              'toggleImageCaption',
-              'linkImage',
-            ],
-          },
-          table: {
-            contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells', 'tableCellProperties', 'tableProperties'],
-          },
-          placeholderConfig: {
-            types: ['name', 'email', 'address'],
-          },
+        },
+      })
+        .then(editor => {
+          window.editor = editor;
         })
         .catch(handleError);
 
@@ -219,7 +212,6 @@
         console.error(
           'Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:',
         );
-        console.warn('Build id: ya67jii2oojd-edtl926pgfpg');
         console.error(error);
       }
     </script>
