@@ -6,13 +6,18 @@
 
 <html lang="en" dir="ltr">
   <head>
-    <title>CKEditor 5 ClassicEditor build</title>
+    <title>CKEditor 5 DecoupledDocumentEditor build</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/png" href="https://c.cksource.com/a/1/logos/ckeditor5.png" />
     <link rel="stylesheet" type="text/css" href="styles.css" />
+    <style>
+      .ck-content figure.table + * {
+        clear: both;
+      }
+    </style>
   </head>
-  <body data-editor="ClassicEditor" data-collaboration="false" data-revision-history="false">
+  <body data-editor="DecoupledDocumentEditor" data-collaboration="false" data-revision-history="false">
     <header>
       <div class="centered">
         <h1>
@@ -33,10 +38,11 @@
     <main>
       <div class="message">
         <div class="centered">
-          <h2>CKEditor 5 online builder demo - ClassicEditor build</h2>
+          <h2>CKEditor 5 online builder demo - DecoupledDocumentEditor build</h2>
         </div>
       </div>
       <div class="centered">
+        <div class="document-editor__toolbar"></div>
         <div class="row row-editor">
           <div class="editor-container">
             <div class="editor">
@@ -130,7 +136,7 @@
     <script src="../build/translations/id.js"></script>
     <script src="../build/ckeditor.js"></script>
     <script>
-      ClassicEditor.create(document.querySelector('.editor'), {
+      DecoupledEditor.create(document.querySelector('.editor'), {
         removePlugins: ['RestrictedEditingMode'],
         // removePlugins: ['StandardEditingMode'],
         toolbar: {
@@ -164,7 +170,7 @@
             'undo',
             'redo',
             'findAndReplace',
-            '-',
+            '|',
             'fontFamily',
             'fontSize',
             'fontColor',
@@ -203,6 +209,8 @@
         },
       })
         .then(editor => {
+          const toolbarContainer = document.querySelector('.document-editor__toolbar');
+          toolbarContainer.appendChild(editor.ui.view.toolbar.element);
           window.editor = editor;
         })
         .catch(handleError);

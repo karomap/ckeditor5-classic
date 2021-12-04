@@ -15,7 +15,7 @@ import Superscript from '@ckeditor/ckeditor5-basic-styles/src/superscript';
 import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline';
 import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote';
 import CodeBlock from '@ckeditor/ckeditor5-code-block/src/codeblock';
-import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
+import DecoupledEditor from '@ckeditor/ckeditor5-editor-decoupled/src/decouplededitor';
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
 import FindAndReplace from '@ckeditor/ckeditor5-find-and-replace/src/findandreplace';
 import FontBackgroundColor from '@ckeditor/ckeditor5-font/src/fontbackgroundcolor';
@@ -69,7 +69,7 @@ import WordCount from '@ckeditor/ckeditor5-word-count/src/wordcount';
 
 import Placeholder from './placeholder/placeholder';
 
-class Editor extends ClassicEditor {}
+class Editor extends DecoupledEditor {}
 
 // Plugins to include in the build.
 Editor.builtinPlugins = [
